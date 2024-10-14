@@ -11,7 +11,6 @@ db.init_app(app)
 @app.route("/meals", methods=['POST'])
 def createNewMeal():
     data = request.get_json()
-    print(data)
     if data.get("nome") and data.get("descricao") and data.get("data_hora") and data.__contains__("data_hora"):
         newMeal = Meal()
         newMeal.name = data['nome']
@@ -27,6 +26,28 @@ def createNewMeal():
         db.session.commit()
 
         return jsonify({"message": f"Refeição id-{newMeal.id} registada com sucesso."}), 201
+    
+    return jsonify({"message": "Dados informados incorretos"}), 400
+
+@app.route("/meals/<int:meal_id>", methods=['PUT'])
+def updateMeal(meal_id):
+    data = request.get_json()
+    meal = Meal.query.get(meal_id)
+    if not meal:
+        return jsonify({"message": "Id de refeição não encontrado"}), 404
+    
+    if data.get("nome") and data.get("descricao") and data.get("data_hora") and data.__contains__("data_hora"):
+        meal.name = data['nome']
+        meal.description = data['descricao']
+        try:
+            meal.datetime = datetime.strptime(data['data_hora'], "%Y-%m-%dT%H:%M:%S.%fZ")
+        except:
+            meal.datetime = datetime.strptime(data['data_hora'], '%d/%m/%Y %H:%M')
+        meal.isDiet = data['na_dieta']
+
+        db.session.commit()
+
+        return jsonify({"message": f"Refeição id-{meal.id} alterada com sucesso."}), 200
     
     return jsonify({"message": "Dados informados incorretos"}), 400
 
