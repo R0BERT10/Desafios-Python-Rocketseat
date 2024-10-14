@@ -10,7 +10,7 @@ Nesse desafio voce desenvolverá uma API para controle de dieta diária, a Daily
 
 ### Regras da aplicação
 
-- [ ] Deve ser possível registrar uma refeição feita, com as seguintes informações:
+- [x] Deve ser possível registrar uma refeição feita, com as seguintes informações:
   - Nome
   - Descrição
   - Data e Hora
