@@ -51,6 +51,17 @@ def updateMeal(meal_id):
     
     return jsonify({"message": "Dados informados incorretos"}), 400
 
+@app.route("/meals/<int:meal_id>", methods=['DELETE'])
+def deleteMeal(meal_id):
+    meal = Meal.query.get(meal_id)
+    if not meal:
+        return jsonify({"message": "Id de refeição não encontrado"}), 404
+    
+    db.session.delete(meal)
+    db.session.commit()
+
+    return jsonify({"message": f"Refeição id-{meal.id} deletada"}), 200
+
 if __name__ == "__main__":
     # Abrir uma sessão no banco de dados e cria-lo caso não exista.
     with app.app_context():
