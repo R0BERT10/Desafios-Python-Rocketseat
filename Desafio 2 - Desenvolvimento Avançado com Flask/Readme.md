@@ -17,8 +17,8 @@ Nesse desafio voce desenvolverá uma API para controle de dieta diária, a Daily
   - Está dentro ou não da dieta
 - [x] Deve ser possível editar uma refeição, podendo alterar todos os dados acima;
 - [x] Deve ser possível apagar uma refeição;
-- [ ] Deve ser possível listar todas as refeições;
-- [ ] Deve ser possível visualizar uma única refeição;
+- [x] Deve ser possível listar todas as refeições;
+- [x] Deve ser possível visualizar uma única refeição;
 - [ ] As informações devem ser salvas em um banco de dados;
 
 ## Resolução

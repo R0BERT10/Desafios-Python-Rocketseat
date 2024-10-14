@@ -42,7 +42,7 @@ def updateMeal(meal_id):
         try:
             meal.datetime = datetime.strptime(data['data_hora'], "%Y-%m-%dT%H:%M:%S.%fZ")
         except:
-            meal.datetime = datetime.strptime(data['data_hora'], '%d/%m/%Y %H:%M')
+            meal.datetime = datetime.strptime(data['data_hora'], '%Y-%m-%d %H:%M')
         meal.isDiet = data['na_dieta']
 
         db.session.commit()
@@ -61,6 +61,21 @@ def deleteMeal(meal_id):
     db.session.commit()
 
     return jsonify({"message": f"Refeição id-{meal.id} deletada"}), 200
+
+@app.route("/meals/<int:meal_id>", methods=['GET'])
+def getMeal(meal_id):
+    meal = Meal.query.get(meal_id)
+    if not meal:
+        return jsonify({"message": "Id de refeição não encontrado"}), 404
+    
+    return jsonify(meal.to_dict()), 200
+
+@app.route("/meals", methods=['GET'])
+def getAllMeal():
+    meals = Meal.query.all()
+    
+    return jsonify({"meals": [meal.to_dict() for meal in meals]}), 200 
+    
 
 if __name__ == "__main__":
     # Abrir uma sessão no banco de dados e cria-lo caso não exista.

@@ -8,3 +8,12 @@ class Meal(db.Model):
     description = mapped_column(String, nullable=False)
     datetime = mapped_column(DateTime, nullable=False)
     isDiet = mapped_column(Boolean, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nome": self.name,
+            "descricao": self.description,
+            "data_hora": self.datetime.strftime("%Y-%m-%d %H:%M"),
+            "na_dieta": self.isDiet
+        }
