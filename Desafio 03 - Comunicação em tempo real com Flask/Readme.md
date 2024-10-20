@@ -19,3 +19,7 @@ Criar a rota para renderizar o arquivo index.html e a função do socketio que s
 por verificar as mensagens enviadas no "chat" que criaremos.
 
 ## Resolução
+
+Para a resolução do desafio foi criado uma api simples usando o framework Flask e com o WebSocketIO.
+
+A aplicação renderiza o template `index.html` (provido pela Rocketseat para esse desafio) no link raiz onde é possível fazer o envio de menagens que serão recebidas por todos os usuários conectados por meio do websocket. A aplicação tem como arquivo principal o `app.py` onde se encontra o criação das instancias do Flask e a criação do socket.
